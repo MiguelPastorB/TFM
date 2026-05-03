@@ -2,4 +2,8 @@
 entornotfm
 
 # Data
-dataset
+raw_dataset
+
+# CSV
+logs-dataset-raw.csv
+logs-dataset-reduced.csv
