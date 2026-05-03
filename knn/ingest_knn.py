@@ -17,13 +17,13 @@ def ingest_logs(client, csv_path, index_name, batch_size=100):
     for i in range(0, len(df), batch_size):
         batch = df.iloc[i : i + batch_size]
         
-        # Generar los vectores (Embeddings)
+        # Generamos los vectores (embeddings)
         # Convertimos la columna log_message en una lista de vectores
         embeddings = model.encode(batch['log_message'].tolist())
         
         acciones = []
         for j, (_, row) in enumerate(batch.iterrows()):
-            # Estructura del documento para OpenSearch k-NN
+            # Estructura del documento para OpenSearch knn
             doc = {
                 "_index": index_name,
                 "_source": {

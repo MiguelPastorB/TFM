@@ -8,7 +8,7 @@ def index_knn(client, index_name="logs-index"):
     settings = {
         "settings": {
             "index": {
-                "knn": True,  # Habilita la funcionalidad k-NN
+                "knn": True,  # Habilita la funcionalidad knn
                 "knn.algo_param.ef_search": "64" # Parámetro de precisión en búsqueda
             }
         },
@@ -40,6 +40,3 @@ def index_knn(client, index_name="logs-index"):
         print(f"Índice '{index_name}' creado exitosamente.")
     else:
         print(f"El índice '{index_name}' ya existe.")
-
-# Para conectar desde Windows a Docker usualmente usas:
-# client = OpenSearch(hosts=[{'host': 'localhost', 'port': 9200}])

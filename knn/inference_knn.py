@@ -10,10 +10,10 @@ def knn_rag(client, log_nuevo, index_name, k=3):
     Paso 1: Convertir log nuevo a vector.
     Paso 2: Buscar los k logs más similares en OpenSearch.
     """
-    # Generar embedding del log que queremos analizar
+    # Generamos embedding del log que queremos analizar
     vector_query = model.encode(log_nuevo).tolist()
 
-    # Consulta k-NN
+    # Consulta knn
     query = {
         "size": k,
         "query": {
@@ -28,7 +28,7 @@ def knn_rag(client, log_nuevo, index_name, k=3):
 
     response = client.search(index=index_name, body=query)
     
-    # Extraer los resultados (contexto para el RAG)
+    # Extraemos los resultados
     contexto = []
     for hit in response['hits']['hits']:
         contexto.append({
@@ -62,7 +62,3 @@ Responde únicamente en formato JSON con la siguiente estructura:
 }
 """
     return prompt
-
-# Ejemplo de uso:
-# contexto = knn_rag(client, "Jan 23 20:42:47 dnsmasq: reply domain.info", "logs-index-tfm")
-# prompt = build_prompt_ids("Jan 23 20:42:47 dnsmasq: reply domain.info", contexto)
